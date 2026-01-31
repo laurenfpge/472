@@ -17,7 +17,7 @@ When implementing this calculation, I kept confusing whether I add the differenc
 5. "Why don't we update unix to match ntp and start from 1900?" -> "We don’t update Unix time to start from 1900 because the cost of changing it would be catastrophic, while the benefit would be small."
 
 ### Design Rationale
-[Your synthesis - why this design, what tradeoffs, why alternatives fail]
+Through my investigation I learned the origin of Unix and NTP time, why we use both, and why we decided to keep both. Unix time counts the number of seconds from January 1st, 1970 and it ignores leap seconds. It is simpler because it was implemented when the internetwork was still growing and we keep it simpler because it is easier for computation and would be too difficult to change today. Changing it would mean effecting all of the software and data used since that time. NTP time counts the number of seconds since January 1st, 1900 and it was created after Unix time, based on earlier time systems. NTP does count leap seconds and is much more precise compared to Unix's standard integer. We keep NTP time to keep the entire network precisely in time and connected, no matter time zone. In this assignment we needed to calculate the offset of time because our computers utilize Unix time and since we were trying to build an NTP client we also needed to know the time in reference to the rest of the world.
 
 ### Implementation Insight
 [Your "aha moment" - how this changed your understanding]
